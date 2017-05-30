@@ -2,10 +2,10 @@
   "name": "react-autocomplete-tags",
   "version": "1.0.0-alpha",
   "description": "React Autocomplete Tags - Celebryts IT",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "start": "NODE_ENV=development webpack --progress --profile --watch",
-    "build": " BABEL_ENV=production WEBPACK_ENV=build webpack --progress --colors --profile",
+    "build": "rimraf lib && BABEL_ENV=production WEBPACK_ENV=build webpack --progress --colors --profile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Celebryts IT (http://www.celebryts.com)",
@@ -32,6 +32,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "postcss-loader": "^2.0.5",
+    "rimraf": "^2.6.1",
     "style-loader": "^0.18.1",
     "webpack": "^2.2.1"
   }

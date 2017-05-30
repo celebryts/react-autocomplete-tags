@@ -11,11 +11,11 @@ const LibraryName = 'ReactAutocompleteTags'
 module.exports = {
 
     entry: {
-        main: __dirname + '/src/Autocomplete.js'
+        index: __dirname + '/src/Autocomplete.js'
     },
     
     output: {
-      filename: '[name].[chunkhash].js',
+      filename: '[name].js',
       path: __dirname + '/lib',
       libraryTarget: 'umd',
       library: LibraryName

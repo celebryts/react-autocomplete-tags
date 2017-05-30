@@ -121,7 +121,7 @@ export default class Autocomplete extends Component {
 								const valueToRender = (typeof tag === 'string') ? tag : tag.label
 								return <Tag value={valueToRender} key={idx} onDelete={this._onClickDelete.bind(this, idx)} />
 							})}
-							<div className={`${input ? styles.input : styles.inputHidden}`}>
+							<div className={`${input ? styles.inputContainer : styles.inputHidden}`}>
 								<input
 									type="text"
 									ref={node => this.input = node}

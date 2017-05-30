@@ -1,6 +1,4 @@
 logs
 *.log
-node_modules
+node_modules/
 coverage
-dist
-lib/

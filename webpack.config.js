@@ -47,10 +47,10 @@ module.exports = {
 		new webpack.ProvidePlugin({ 'React': 'react' }),
 		new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
     new ExtractTextPlugin({ filename: '[name]-app.css', disable: false, allChunks: true }),
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      comments: false
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   beautify: false,
+    //   comments: false
+    // }),
     new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
         minChunks: function (module) {

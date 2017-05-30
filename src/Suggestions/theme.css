@@ -1,0 +1,29 @@
+.dropdown{
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  z-index: 1000000;
+}
+
+.suggestions{
+  list-style: none;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+
+.suggestions li{
+  border-bottom: 1px solid #E0E0E0;
+  padding: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.suggestions li:hover{
+  background-color: #EEEEEE;
+}
+
+.focused{
+  transition: backgroundColor linear .2s;
+  background-color: #EEEEEE;
+}

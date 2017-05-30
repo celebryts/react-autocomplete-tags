@@ -1,0 +1,38 @@
+.root{
+  position: relative;
+  padding: 0.5rem;
+  border: 0.1rem solid #E0E0E0;
+  cursor: text;
+}
+
+.content{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  padding: 0.5rem;
+}
+
+.input{
+  width: auto;
+  margin: .4rem;
+  flex: 1;
+}
+
+.input{
+  width: 100%;
+  border: 0;
+  padding: 0 !important;
+  outline: none;
+  background-color: transparent;
+}
+
+.inputHidden{
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.inputHidden input{
+  display: none;
+}

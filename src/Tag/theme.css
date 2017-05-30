@@ -1,0 +1,44 @@
+.tag{
+  border-radius: 3.2rem;
+  padding: 0 0 0 1rem;
+	margin: .4rem;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  background: #EEEEEE;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text{
+  padding-right: 2.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete {
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0.4rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.delete:hover .deleteIcon {
+  background-color: #757575;
+}
+
+.deleteIcon {
+  vertical-align: top;
+  background-color: #BDBDBD;
+  border-radius: 2.4rem;
+}
+
+.deleteIcon .deleteX {
+  fill: transparent;
+  stroke-width: 0.4rem;
+  stroke: #fff;
+}

@@ -1,0 +1,7 @@
+logs
+*.log
+.babelrc
+node_modules
+coverage
+dist
+lib/

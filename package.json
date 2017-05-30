@@ -1,0 +1,38 @@
+{
+  "name": "react-autocomplete-tags",
+  "version": "1.0.0-alpha",
+  "description": "React Autocomplete Tags - Celebryts IT",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development webpack --progress --profile --watch",
+    "build": " BABEL_ENV=production WEBPACK_ENV=build webpack --progress --colors --profile",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Celebryts IT (http://www.celebryts.com)",
+  "keywords": [
+    "react",
+    "autocomplete",
+    "tags"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "postcss-loader": "^2.0.5",
+    "style-loader": "^0.18.1",
+    "webpack": "^2.2.1"
+  }
+}

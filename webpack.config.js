@@ -11,7 +11,7 @@ const LibraryName = 'ReactAutocompleteTags'
 module.exports = {
 
     entry: {
-        index: __dirname + '/src/Autocomplete.js'
+        index: __dirname + '/src/index.js'
     },
     
     output: {

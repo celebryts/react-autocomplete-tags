@@ -38,6 +38,7 @@ export default class Autocomplete extends Component {
 		customLoader: PropTypes.node,
 		loaderPosition: PropTypes.oneOf(['top', 'bottom']),
 		children: PropTypes.node,
+		saveOnBlur: PropTypes.bool,
 		onKeyUp: PropTypes.func,
 		onKeyDown: PropTypes.func,
 		onAdd: PropTypes.func,
@@ -58,6 +59,7 @@ export default class Autocomplete extends Component {
 		loaderPosition: 'bottom',
 		enterKeys: [],
 		children: <input />,
+		saveOnBlur: false,
 		onKeyUp: ()=>{},
 		onKeyDown: ()=>{},
 		onAdd: ()=>{},
@@ -199,8 +201,15 @@ export default class Autocomplete extends Component {
 	}
 	
 	_onBlur = () => {
+		const { props, state } = this
+		const { value } = state
+		
 		this.setState({ active: false })
-		this.props.onBlur()
+		props.onBlur()
+		
+		if(props.saveOnBlur){
+			this._addTag(value, value)
+		}
 	}
 
 	/**
@@ -254,13 +263,14 @@ export default class Autocomplete extends Component {
 
 	/**
 	 * Calling this method we add a new tag in state and turn the input empty
-	 * @param {String} value Text to be added in a new tag
+	 * @param {String} label Label to be added in a new tag
+	 * @param {String} value Value to be added in a new tag
 	 */
 	_addTag = (label, value) => {
+		label = label.trim()
 		const { limitTags, allowCreateTag } = this.props
 			, { tags } = this.state
 			, tagsLength = tags.length
-		label = label.trim()
 
 		/* Verify if allowCreateTag, and allow or not */
 		if(label == '' || (!allowCreateTag && !this._valueMatchSuggestions(label))) return

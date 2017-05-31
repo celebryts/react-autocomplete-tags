@@ -61,6 +61,7 @@ class Example extends Component {
 | [`tags`](#tagsRequestedProp) | Array | [] | Visible tags in input. |
 | [`limitTags`](#limitTagsProp) | Number | null | Maximum allowed tags. |
 | [`allowCreateTag`](#allowCreateTagProp) | Boolean | true | If user can create tags without restritions. |
+| [`saveOnBlur`](#saveOnBlurProp) | Boolean | false | If component must add current input value on blur. |
 | [`delay`](#delayProp) | Number | null | Delay in onChange event after user changes. |
 | [`onKeyUp`](#onKeyUpProps) | Function | ()=>{} | Callback for key up event. |
 | [`onKeyDown`](#onKeyUpProps) | Function | ()=>{} | Callback for key down event. |

@@ -1,14 +1,14 @@
 {
   "name": "react-autocomplete-tags",
   "version": "1.0.0-alpha",
-  "description": "React Autocomplete Tags - Celebryts IT",
+  "description": "A React component that build a Autocomplete with tags - Built by Celebryts IT",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development webpack --progress --profile --watch",
     "build": "rimraf lib && webpack --progress --colors --profile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Celebryts IT (http://www.celebryts.com)",
+  "author": "Raphael Guastaferro (rapha@celebryts.com.br) and Celebryts IT (http://www.celebryts.com) contributors",
   "keywords": [
     "react",
     "autocomplete",

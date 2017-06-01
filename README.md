@@ -5,7 +5,7 @@ A React component that build a Autocomplete with tags.
 ### Installation
 
 ```sh
-npm install react-autocomplete-tags --save
+npm install @celebryts/react-autocomplete-tags --save
 ```
 
 ## Basic Usage
@@ -224,4 +224,4 @@ You can report your issues [here](https://github.com/celebryts/react-autocomplet
 
 
 ## Authors
-Built by [Celebryts IT](https://github.com/celebryts)
+Built by [Celebryts](https://github.com/celebryts)

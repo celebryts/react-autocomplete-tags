@@ -145,11 +145,11 @@ export default class Autocomplete extends Component {
 
 	/* It controls the input value */
 	_onChange = ev => {
-		const hasKeys = this.props.enterKeys.some(enterKey => Key().getCharacter(enterKey) === ev.target.value)
+		const { enterKeys } = this.props
+		const hasKeys = enterKeys.some(enterKey => Key().getCharacter(enterKey) === ev.target.value)
 		if(hasKeys) return
 		this.setState({ value: ev.target.value })
 
-		const { delay, onChange, enterKeys } = this.props
 		const { value } = ev.target
 		
 		;(delay) ? this.onChangeDebounced(value) : onChange(value)

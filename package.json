@@ -1,6 +1,6 @@
 {
   "name": "react-autocomplete-tags",
-  "version": "1.0.11-alpha",
+  "version": "1.0.12-alpha",
   "description": "A React component that build a Autocomplete with tags - Built by Celebryts IT",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/reactjs/react-autocomplete.git"
+    "url": "https://github.com/celebryts/react-autocomplete-tags"
   },
   "license": "ISC",
   "dependencies": {

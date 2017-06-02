@@ -1,10 +1,10 @@
 {
   "name": "@celebryts/react-autocomplete-tags",
-  "version": "1.0.21-alpha",
+  "version": "1.0.3-alpha",
   "description": "A React component that build a Autocomplete with tags - Built by Celebryts IT",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack --progress --profile --watch",
+    "dev": "start-storybook -p 9001 -c .storybook",
     "build": "rimraf lib && webpack --progress --colors --profile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,6 +26,7 @@
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
+    "@storybook/react": "^3.0.0",
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.23.1",
     "babel-loader": "^7.0.0",

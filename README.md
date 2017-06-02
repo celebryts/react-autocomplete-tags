@@ -220,8 +220,13 @@ Coming soon.
 You can report your issues [here](https://github.com/celebryts/react-autocomplete-tags/issues)
 
 ## Pull Requests
-[Pull Requests](https://github.com/celebryts/react-autocomplete-tags) are always welcome! :)
+[Pull Requests](https://github.com/celebryts/react-autocomplete-tags/pulls) are always welcome! :)
 
+Clone the repository: https://github.com/celebryts/react-autocomplete-tags, and run the command:
+
+```sh
+npm run dev
+```
 
 ## Authors
 Built by [Celebryts](https://github.com/celebryts)

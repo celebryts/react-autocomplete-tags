@@ -88,6 +88,11 @@ export default class Autocomplete extends Component {
 
 	componentDidMount() {
 		this._enableCloseOnExit()
+		this.verifyifshouldShowInput()
+	}
+
+	componentDidUpdate() {
+		this.verifyifshouldShowInput()
 	}
 
 	componentWillUnmount(){
@@ -145,10 +150,14 @@ export default class Autocomplete extends Component {
 
 	/* It controls the input value */
 	_onChange = ev => {
-		const { enterKeys } = this.props
+		const { enterKeys, delay, onChange, suggestions } = this.props
 		const hasKeys = enterKeys.some(enterKey => Key().getCharacter(enterKey) === ev.target.value)
 		if(hasKeys) return
 		this.setState({ value: ev.target.value })
+		
+		if(suggestions.length){
+			this._restoreSuggestions()
+		}
 
 		const { value } = ev.target
 		
@@ -200,12 +209,12 @@ export default class Autocomplete extends Component {
 		this.props.onFocus()
 	}
 	
-	_onBlur = () => {
+	_onBlur = ev => {
 		const { props, state } = this
 		const { value } = state
 		
 		this.setState({ active: false })
-		props.onBlur()
+		props.onBlur(ev)
 		
 		if(props.saveOnBlur){
 			this._addTag(value, value)
@@ -291,6 +300,10 @@ export default class Autocomplete extends Component {
 		})
 	}
 
+	_restoreSuggestions = () => {
+		this.setState({ suggestions: this.props.suggestions })
+	}
+
 	_valueMatchSuggestions = value => this.state.suggestions.some(item => item.label === value )
 
 	_enableCloseOnExit = ()=>{
@@ -318,6 +331,14 @@ export default class Autocomplete extends Component {
 		if(!tagsLength) tagsLength = this.state.tags.length
 
 		this.setState({input: limitTags ? tagsLength < limitTags : true })
+	}
+
+	verifyifshouldShowInput = () => {
+		const { state, props } = this
+		const newStateInput = (!props.limitTags || state.tags.length < props.limitTags)
+		if(newStateInput != this.state.input){
+			this.setState({ input: newStateInput })
+		}
 	}
 
 	hasfocusedsuggestion = () => Number.isInteger(this.state.focusedSuggestion)

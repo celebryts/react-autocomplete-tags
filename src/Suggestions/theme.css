@@ -9,12 +9,14 @@
 
 .suggestions{
   list-style: none;
+  padding-left: 0;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
 
 .suggestions li{
   border-bottom: 1px solid #E0E0E0;
-  padding: 1rem;
+  padding: .6em;
+  font-size: 1.6em;
   cursor: pointer;
   user-select: none;
 }

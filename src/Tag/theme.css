@@ -1,7 +1,7 @@
 .tag{
-  border-radius: 3.2rem;
-  padding: 0 0 0 1rem;
-	margin: .4rem;
+  border-radius: 3.2em;
+  padding: 0 0 0 1em;
+	margin: .4em;
   position: relative;
   display: flex;
   overflow: hidden;
@@ -11,20 +11,23 @@
 }
 
 .text{
-  padding-right: 2.5rem;
+  font-size: 1.6em;
+  padding-right: 2.5em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.5;
 }
 
 .delete {
-  width: 2.4rem;
-  height: 2.4rem;
-  padding: 0.4rem;
+  width: 1.6em;
+  height: 1.6em;
+  padding: 0.4em;
   position: absolute;
   right: 0;
   top: 0;
   cursor: pointer;
+  box-sizing: content-box;
 }
 
 .delete:hover .deleteIcon {
@@ -34,11 +37,11 @@
 .deleteIcon {
   vertical-align: top;
   background-color: #BDBDBD;
-  border-radius: 2.4rem;
+  border-radius: 2.4em;
 }
 
 .deleteIcon .deleteX {
   fill: transparent;
-  stroke-width: 0.4rem;
+  stroke-width: 0.4em;
   stroke: #fff;
 }

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "start-storybook -p 9001 -c .storybook",
     "build": "rimraf lib && webpack --progress --colors --profile",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-storybook": "build-storybook"
   },
   "author": "Raphael Guastaferro (rapha@celebryts.com.br) and Celebryts IT (http://www.celebryts.com) contributors",
   "keywords": [
@@ -26,7 +27,7 @@
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
-    "@storybook/react": "^3.0.0",
+    "@storybook/react": "^3.0.1",
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.23.1",
     "babel-loader": "^7.0.0",

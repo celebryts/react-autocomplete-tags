@@ -2,7 +2,10 @@
 
 A React component that build a Autocomplete with tags.
 
-### Installation
+## Demos
+[https://celebryts.github.io/react-autocomplete-tags](https://celebryts.github.io/react-autocomplete-tags)
+
+## Installation
 
 ```sh
 npm install @celebryts/react-autocomplete-tags --save
@@ -212,9 +215,6 @@ Sometimes we don't need the event onChange immediately after user action, so, we
   onChange={this.handleChange}
 />
 ```
-
-## Demos
-Coming soon.
 
 ## Issues
 You can report your issues [here](https://github.com/celebryts/react-autocomplete-tags/issues)

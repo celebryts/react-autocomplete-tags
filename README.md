@@ -11,6 +11,12 @@ A React component that build a Autocomplete with tags.
 npm install @celebryts/react-autocomplete-tags --save
 ```
 
+or
+
+```sh
+yarn add @celebryts/react-autocomplete-tags
+```
+
 ## Basic Usage
 
 ```js

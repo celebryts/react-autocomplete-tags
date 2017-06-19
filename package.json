@@ -1,6 +1,6 @@
 {
   "name": "@celebryts/react-autocomplete-tags",
-  "version": "1.0.31-alpha",
+  "version": "1.0.32-alpha",
   "description": "A React component that build a Autocomplete with tags - Built by Celebryts IT",
   "main": "index.js",
   "scripts": {

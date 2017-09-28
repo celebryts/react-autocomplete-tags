@@ -1,6 +1,6 @@
 {
   "name": "@celebryts/react-autocomplete-tags",
-  "version": "1.0.32-alpha",
+  "version": "1.0.0",
   "description": "A React component that build a Autocomplete with tags - Built by Celebryts IT",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "react": ">=15.5.0",
     "react-dom": ">=15.5.0"
   },
-  "peerDependencies":{
+  "peerDependencies": {
     "react": ">=15.5.0",
     "react-dom": ">=15.5.0"
   },
@@ -44,12 +44,12 @@
     "babel-preset-stage-0": "^6.22.0",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
-    "extract-text-webpack-plugin": "^2.1.0",
+    "extract-text-webpack-plugin": "3.0.0",
     "file-loader": "^0.11.1",
     "postcss-loader": "^2.0.5",
     "prop-types": "^15.5.10",
     "rimraf": "^2.6.1",
     "style-loader": "^0.18.1",
-    "webpack": "^2.2.1"
+    "webpack": "3.6.0"
   }
 }

@@ -12,6 +12,12 @@ module.exports = {
     entry: {
         index: __dirname + '/src/index.js'
     },
+
+    externals: {
+      react: 'react',
+      'react-dom': 'react-dom',
+      'prop-types': 'prop-types',
+    },
     
     output: {
       filename: '[name].js',

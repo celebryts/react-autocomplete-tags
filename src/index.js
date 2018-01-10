@@ -10,8 +10,8 @@ import debounce from 'lodash/debounce'
 import isEqual from 'lodash/isEqual'
 
 const validateTagsLimit = (tags, limit) => {
-  if(!tags) return []
-	if(tags.length > limit){
+	if (!tags) return []
+	if (tags.length > limit) {
 		throw new Error('Number of initial tags should be less than the tag limit')
 	}
 	return tags
@@ -60,13 +60,13 @@ export default class Autocomplete extends Component {
 		enterKeys: [],
 		children: <input />,
 		saveOnBlur: false,
-		onKeyUp: ()=>{},
-		onKeyDown: ()=>{},
-		onAdd: ()=>{},
-		onDelete: ()=>{},
-		onFocus: ()=>{},
-		onBlur: ()=>{},
-		onChange: ()=>{},
+		onKeyUp: () => { },
+		onKeyDown: () => { },
+		onAdd: () => { },
+		onDelete: () => { },
+		onFocus: () => { },
+		onBlur: () => { },
+		onChange: () => { },
 	}
 
 	state = {
@@ -77,10 +77,11 @@ export default class Autocomplete extends Component {
 		value: '',
 		input: true,
 		suggestions: this.props.suggestions,
-		focusedSuggestion: null
+		focusedSuggestion: null,
+		pastedValue: ''
 	}
 
-	constructor(props){
+	constructor(props) {
 		super(props)
 		this.input
 		this.root
@@ -91,25 +92,50 @@ export default class Autocomplete extends Component {
 		this.verifyifshouldShowInput()
 	}
 
+	componentWillUpdate(nextProps, nextState) {
+		// console.log('NP', nextProps);
+		// console.log('NS', nextState);
+
+		if (nextState.pastedValue && nextState.value.toUpperCase() === this.state.pastedValue.toUpperCase()) {
+			this.setState({ value: '' })
+		}
+
+		// if (nextState.value != '') {
+		// 	//convert tags in indexed array
+		// 	let arr = []
+		// 	nextState.tags.map(tag => {
+		// 		arr[tag] = true
+		// 	})
+		// 	// console.log(arr)
+
+		// 	//if value is a tag, clear value
+		// 	if (arr[nextState.value]) {
+		// 		this.setState({ value: '' })	
+		// 	}
+		// 	//else, show value
+
+		// }
+	}
+
 	componentDidUpdate() {
 		this.verifyifshouldShowInput()
 	}
 
-	componentWillUnmount(){
+	componentWillUnmount() {
 		/* Disable listener on document */
-		this._disableCloseOnExit()	
+		this._disableCloseOnExit()
 	}
 
-	componentWillReceiveProps(nextProps){
+	componentWillReceiveProps(nextProps) {
 		const suggestionsAreEqual = isEqual(nextProps.suggestions, this.props.suggestions)
 		const newState = {}
-		if(this.state.active && !suggestionsAreEqual){
+		if (this.state.active && !suggestionsAreEqual) {
 			newState.suggestions = nextProps.suggestions
 		}
-		if(this.props.tags !== nextProps.tags) {
+		if (this.props.tags !== nextProps.tags) {
 			newState.tags = validateTagsLimit(nextProps.tags, nextProps.limitTags)
 		}
-		if(newState) this.setState(newState)
+		if (newState) this.setState(newState)
 	}
 
 	render() {
@@ -118,33 +144,33 @@ export default class Autocomplete extends Component {
 		return (
 			<div>
 				{loader && loaderPosition === 'top' && customLoader}
-					<div
-						className={`${className} ${styles.root}`}
-						onClick={this._onClick}
-						ref={node => this.root = node}
-					>
-						<div className={styles.content}>
-							{tags.map((tag, idx) => {          
-								const valueToRender = (typeof tag === 'string') ? tag : tag.label
-								return <Tag value={valueToRender} key={idx} onDelete={this._onClickDelete.bind(this, idx)} />
-							})}
-							<div className={`${input ? styles.inputContainer : styles.inputHidden}`}>
-								<input
-									type="text"
-									ref={node => this.input = node}
-									onKeyUp={onKeyUp}
-									onKeyDown={this._onKeyDown}
-									onChange={this._onChange}
-									onFocus={this._onFocus}
-									onBlur={this._onBlur}
-									onPaste={this._onPaste}
-									value={value}
-								/>
-							</div>
-							<Suggestions suggestions={suggestions} onClick={this.onClickSuggestion} focused={focusedSuggestion} />
+				<div
+					className={`${className} ${styles.root}`}
+					onClick={this._onClick}
+					ref={node => this.root = node}
+				>
+					<div className={styles.content}>
+						{tags.map((tag, idx) => {
+							const valueToRender = (typeof tag === 'string') ? tag : tag.label
+							return <Tag value={valueToRender} key={idx} onDelete={this._onClickDelete.bind(this, idx)} />
+						})}
+						<div className={`${input ? styles.inputContainer : styles.inputHidden}`}>
+							<input
+								type="text"
+								ref={node => this.input = node}
+								onKeyUp={onKeyUp}
+								onKeyDown={this._onKeyDown}
+								onChange={this._onChange}
+								onFocus={this._onFocus}
+								onBlur={this._onBlur}
+								onPaste={this._onPaste}
+								value={value}
+							/>
 						</div>
-						{loader && loaderPosition === 'bottom' && customLoader}
+						<Suggestions suggestions={suggestions} onClick={this.onClickSuggestion} focused={focusedSuggestion} />
 					</div>
+					{loader && loaderPosition === 'bottom' && customLoader}
+				</div>
 			</div>
 		)
 	}
@@ -153,16 +179,16 @@ export default class Autocomplete extends Component {
 	_onChange = ev => {
 		const { enterKeys, delay, onChange, suggestions } = this.props
 		const hasKeys = enterKeys.some(enterKey => Key().getCharacter(enterKey) === ev.target.value)
-		if(hasKeys) return
+		if (hasKeys) return
 		this.setState({ value: ev.target.value })
-		
-		if(suggestions.length){
+
+		if (suggestions.length) {
 			this._restoreSuggestions()
 		}
 
 		const { value } = ev.target
-		
-		;(delay) ? this.onChangeDebounced(value) : onChange(value)
+
+			; (delay) ? this.onChangeDebounced(value) : onChange(value)
 	}
 
 	/* Handle click on container */
@@ -177,30 +203,30 @@ export default class Autocomplete extends Component {
 		const hasAnotherEnterKey = key.isAny(this.props.enterKeys)
 
 		this.props.onKeyDown(ev.target.value)
-		
+
 		/* Create navigation on suggestions when key down */
-		if(key.is('down')){
+		if (key.is('down')) {
 			let newFocus = (!this.hasfocusedsuggestion()) ? 0 : focusedSuggestion + 1
 			this.setState({
-				focusedSuggestion: (newFocus > suggestions.length-1) ? 0 : newFocus
+				focusedSuggestion: (newFocus > suggestions.length - 1) ? 0 : newFocus
 			})
 		}
 
 		/* Create navigation on suggestions when key up */
-		if(key.is('up')){
+		if (key.is('up')) {
 			let newFocus = focusedSuggestion - 1
 			this.setState({
-				focusedSuggestion: (focusedSuggestion < 1) ? suggestions.length-1 : newFocus
+				focusedSuggestion: (focusedSuggestion < 1) ? suggestions.length - 1 : newFocus
 			})
 		}
 
-		if(key.is('enter') || hasAnotherEnterKey){
+		if (key.is('enter') || hasAnotherEnterKey) {
 			this._handleEnter(ev, value)
-			hasAnotherEnterKey && this.setState({ value: ''})
+			hasAnotherEnterKey && this.setState({ value: '' })
 		}
-		
+
 		//Verify why is 8
-		if(key.is('delete') || key.get() === 8){
+		if (key.is('delete') || key.get() === 8) {
 			this._handleBackspace(ev)
 		}
 	}
@@ -209,15 +235,15 @@ export default class Autocomplete extends Component {
 		this.setState({ active: true })
 		this.props.onFocus()
 	}
-	
+
 	_onBlur = ev => {
 		const { props, state } = this
 		const { value } = state
-		
+
 		this.setState({ active: false })
 		props.onBlur(ev)
-		
-		if(props.saveOnBlur){
+
+		if (props.saveOnBlur) {
 			this._addTag(value, value)
 		}
 	}
@@ -229,10 +255,10 @@ export default class Autocomplete extends Component {
 	_onClickDelete = idx => {
 		const newState = Object.assign({}, this.state)
 			, { tags } = newState
-			, deletedTag = tags.splice(idx,1)
+			, deletedTag = tags.splice(idx, 1)
 
 		this.setState({ tags })
-		this.handleInputVisibility(tags.length-1)
+		this.handleInputVisibility(tags.length - 1)
 		this.props.onDelete(deletedTag, tags)
 	}
 
@@ -240,72 +266,62 @@ export default class Autocomplete extends Component {
 	 * @param {Number} idx Suggestion index to be manipulated
 	 */
 	onClickSuggestion = idx => {
-		const {label, value} = this.state.suggestions[idx]
+		const { label, value } = this.state.suggestions[idx]
 		this._addTag(label, value)
 	}
 
 	/* On enter we add a tag in state.tags */
-	_handleEnter = (ev, value) =>{
+	_handleEnter = (ev, value) => {
 		const { suggestions, focusedSuggestion } = this.state
 		const { allowCreateTag } = this.props
 		const hasfocusedsuggestion = this.hasfocusedsuggestion()
 
-		if(allowCreateTag){
+		if (allowCreateTag) {
 			let tagToAdd = (!hasfocusedsuggestion) ? value : suggestions[focusedSuggestion].label
 			this._addTag(tagToAdd, value)
-		}else{
-			if(hasfocusedsuggestion){
+		} else {
+			if (hasfocusedsuggestion) {
 				const { label: labelToAdd, value: valueToAdd } = suggestions[focusedSuggestion]
 				this._addTag(labelToAdd, valueToAdd)
 			}
 		}
 	}
-	
+
 	/* On backspace we remove a tag if the input is empty */
-	_handleBackspace = ev =>{
+	_handleBackspace = ev => {
 		const { state } = this
-		if(state.value === '' && state.tags.length){
+		if (state.value === '' && state.tags.length) {
 			let newState = Object.assign({}, state)
-			this._onClickDelete(newState.tags.length-1)
+			this._onClickDelete(newState.tags.length - 1)
 			this.setState({ tags: newState.tags })
 		}
 	}
 
 	_onPaste = ev => {
 		const { allowCreateTag } = this.props
-		// const { props, state } = this
-		// const { value } = state
-		
-		// this.setState({ active: false })
 
-		// console.log(value)
-		// return
-		
 		const pastedValue = ev.clipboardData.getData('text')
-		// console.log(ev.clipboardData.getData('text'));
-		// console.log(pastedValue.replace(/\n\s*/g," - "))
+		if (pastedValue.trim() && allowCreateTag) {
 
-		if (allowCreateTag) {
+			//used to control input component value
+			// this.state.pastedValue = pastedValue.replace(/\n\s*/g, ' ').trim()
+			this.state.pastedValue = pastedValue.replace(/\n/g, ' ').trim()
+
 			let tags = pastedValue.split(/\n\s*/g)
-			
+
 			//remove remaining break lines 
 			tags = tags.filter(value => value !== '')
-			
-			console.log(tags)
+
+			// console.log('tags onPaste event', tags)
 			if (tags.length > -1) {
 				tags.map((tag) => {
-					console.log('tag', tag)
-					this.state.tags.push(tag)
+					// console.log('tag', tag)
+					this.state.tags.push(tag.trim())
 				})
 
 				this.setState(this.state)
-				this.setState({ value: '' })
-				// console.log(this.state.value)
 			}
 		}
-
-
-
 	}
 
 	/**
@@ -320,18 +336,18 @@ export default class Autocomplete extends Component {
 			, tagsLength = tags.length
 
 		/* Verify if allowCreateTag, and allow or not */
-		if(label == '' || (!allowCreateTag && !this._valueMatchSuggestions(label))) return
+		if (label == '' || (!allowCreateTag && !this._valueMatchSuggestions(label))) return
 
 		this.setState({
 			value: '',
-			tags: (!limitTags || tags.length < limitTags) ? [...tags, label ] : tags
+			tags: (!limitTags || tags.length < limitTags) ? [...tags, label] : tags
 		})
 
-		
 
-		this.handleInputVisibility(tagsLength+1)
+
+		this.handleInputVisibility(tagsLength + 1)
 		this._clearSuggestions()
-		this.props.onAdd({label, value})
+		this.props.onAdd({ label, value })
 	}
 
 	_clearSuggestions = () => {
@@ -345,20 +361,20 @@ export default class Autocomplete extends Component {
 		this.setState({ suggestions: this.props.suggestions })
 	}
 
-	_valueMatchSuggestions = value => this.state.suggestions.some(item => item.label === value )
+	_valueMatchSuggestions = value => this.state.suggestions.some(item => item.label === value)
 
-	_enableCloseOnExit = ()=>{
+	_enableCloseOnExit = () => {
 		window.document.addEventListener('click', this.closeOnClickIfIsDescendant, false)
 	}
 
-	_disableCloseOnExit = ()=>{
+	_disableCloseOnExit = () => {
 		window.document.removeEventListener('click', this.closeOnClickIfIsDescendant)
 	}
 
 	/* Verify if the clicked target is inside the element, and close if necessary */
 	closeOnClickIfIsDescendant = ev => {
 		const isDescendant = DOM.isDescendant(ev.target, findDOMNode(this.root))
-		if(!isDescendant){
+		if (!isDescendant) {
 			this._clearSuggestions()
 		}
 	}
@@ -369,21 +385,21 @@ export default class Autocomplete extends Component {
 	 */
 	handleInputVisibility = tagsLength => {
 		const { limitTags } = this.props
-		if(!tagsLength) tagsLength = this.state.tags.length
+		if (!tagsLength) tagsLength = this.state.tags.length
 
-		this.setState({input: limitTags ? tagsLength < limitTags : true })
+		this.setState({ input: limitTags ? tagsLength < limitTags : true })
 	}
 
 	verifyifshouldShowInput = () => {
 		const { state, props } = this
 		const newStateInput = (!props.limitTags || state.tags.length < props.limitTags)
-		if(newStateInput != this.state.input){
+		if (newStateInput != this.state.input) {
 			this.setState({ input: newStateInput })
 		}
 	}
 
 	hasfocusedsuggestion = () => Number.isInteger(this.state.focusedSuggestion)
-	
+
 	onChangeDebounced = debounce(value => this.props.onChange(value), this.props.delay)
 
 }

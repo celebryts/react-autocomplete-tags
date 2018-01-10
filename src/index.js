@@ -93,17 +93,25 @@ export default class Autocomplete extends Component {
 	}
 
 	componentWillUpdate(nextProps, nextState) {
-		// console.log('NP', nextProps);
-		// console.log('NS', nextState);
 
 		if (nextState.pastedValue && nextState.value.toUpperCase() === this.state.pastedValue.toUpperCase()) {
 			this.setState({ value: '' })
 		}
 
+		//STARTING POINT TO CONTROL TAG DUPLICATION
+		// Must convert stated tags[] in a associative array
+		// to compare existing tags quickly
+		// if the exact same tag exists, 
+		// don't accept the new candidate tag
+		//
+		// The lines below are an idea of implementation.
+		// Change everything you need
+		//
 		// if (nextState.value != '') {
-		// 	//convert tags in indexed array
+		// 	//convert tags in associative array
 		// 	let arr = []
 		// 	nextState.tags.map(tag => {
+		//		//can be 'true' or any value
 		// 		arr[tag] = true
 		// 	})
 		// 	// console.log(arr)
@@ -112,8 +120,7 @@ export default class Autocomplete extends Component {
 		// 	if (arr[nextState.value]) {
 		// 		this.setState({ value: '' })	
 		// 	}
-		// 	//else, show value
-
+		// 	//else, do something or nothing
 		// }
 	}
 
@@ -297,6 +304,10 @@ export default class Autocomplete extends Component {
 		}
 	}
 
+	/**
+	 * Handle pasted text and create right tags
+	 * @param {Any} A React clipboard event
+	 */
 	_onPaste = ev => {
 		const { allowCreateTag } = this.props
 
@@ -304,7 +315,6 @@ export default class Autocomplete extends Component {
 		if (pastedValue.trim() && allowCreateTag) {
 
 			//used to control input component value
-			// this.state.pastedValue = pastedValue.replace(/\n\s*/g, ' ').trim()
 			this.state.pastedValue = pastedValue.replace(/\n/g, ' ').trim()
 
 			let tags = pastedValue.split(/\n\s*/g)
@@ -312,11 +322,9 @@ export default class Autocomplete extends Component {
 			//remove remaining break lines 
 			tags = tags.filter(value => value !== '')
 
-			// console.log('tags onPaste event', tags)
 			if (tags.length > -1) {
 				tags.map((tag) => {
-					// console.log('tag', tag)
-					this.state.tags.push(tag.trim())
+					this._addTag(tag)
 				})
 
 				this.setState(this.state)
@@ -336,14 +344,18 @@ export default class Autocomplete extends Component {
 			, tagsLength = tags.length
 
 		/* Verify if allowCreateTag, and allow or not */
-		if (label == '' || (!allowCreateTag && !this._valueMatchSuggestions(label))) return
+		if (tags.length === limitTags 
+			|| label == '' 
+			|| (!allowCreateTag && !this._valueMatchSuggestions(label))) 
+			return
 
-		this.setState({
-			value: '',
-			tags: (!limitTags || tags.length < limitTags) ? [...tags, label] : tags
-		})
+		if (!limitTags || tags.length < limitTags) {
+			this.state.tags.push(label)
+		} 
 
-
+		//using this way to secure state update 
+		this.state.value = ''
+		this.setState(this.state)
 
 		this.handleInputVisibility(tagsLength + 1)
 		this._clearSuggestions()

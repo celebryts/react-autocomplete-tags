@@ -137,6 +137,7 @@ export default class Autocomplete extends Component {
 									onChange={this._onChange}
 									onFocus={this._onFocus}
 									onBlur={this._onBlur}
+									onPaste={this._onPaste}
 									value={value}
 								/>
 							</div>
@@ -270,6 +271,43 @@ export default class Autocomplete extends Component {
 		}
 	}
 
+	_onPaste = ev => {
+		const { allowCreateTag } = this.props
+		// const { props, state } = this
+		// const { value } = state
+		
+		// this.setState({ active: false })
+
+		// console.log(value)
+		// return
+		
+		const pastedValue = ev.clipboardData.getData('text')
+		// console.log(ev.clipboardData.getData('text'));
+		// console.log(pastedValue.replace(/\n\s*/g," - "))
+
+		if (allowCreateTag) {
+			let tags = pastedValue.split(/\n\s*/g)
+			
+			//remove remaining break lines 
+			tags = tags.filter(value => value !== '')
+			
+			console.log(tags)
+			if (tags.length > -1) {
+				tags.map((tag) => {
+					console.log('tag', tag)
+					this.state.tags.push(tag)
+				})
+
+				this.setState(this.state)
+				this.setState({ value: '' })
+				// console.log(this.state.value)
+			}
+		}
+
+
+
+	}
+
 	/**
 	 * Calling this method we add a new tag in state and turn the input empty
 	 * @param {String} label Label to be added in a new tag
@@ -288,6 +326,9 @@ export default class Autocomplete extends Component {
 			value: '',
 			tags: (!limitTags || tags.length < limitTags) ? [...tags, label ] : tags
 		})
+
+		
+
 		this.handleInputVisibility(tagsLength+1)
 		this._clearSuggestions()
 		this.props.onAdd({label, value})

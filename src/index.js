@@ -114,7 +114,7 @@ export default class Autocomplete extends Component {
 
 	render() {
 		const { className, children, onKeyUp, customLoader, loaderPosition, loader } = this.props
-		const { tags, value, suggestions, focusedSuggestion, input } = this.state
+		const { tags, value, suggestions, focusedSuggestion, input, active } = this.state
 		return (
 			<div>
 				{loader && loaderPosition === 'top' && customLoader}
@@ -140,7 +140,8 @@ export default class Autocomplete extends Component {
 									value={value}
 								/>
 							</div>
-							<Suggestions suggestions={suggestions} onClick={this.onClickSuggestion} focused={focusedSuggestion} />
+							{ this.state.active && 
+							<Suggestions suggestions={suggestions} onClick={this.onClickSuggestion} focused={focusedSuggestion} /> }
 						</div>
 						{loader && loaderPosition === 'bottom' && customLoader}
 					</div>

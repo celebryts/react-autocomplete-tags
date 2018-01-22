@@ -5,9 +5,9 @@ import Chip from 'material-ui/Chip';
 const ChipComponent = (props) => (
   <Chip
     backgroundColor={props.backgroundColor}
-    onRequestDelete={props.handleRequestDelete}
-    onClick={props.handleClick}
-    style={{margin: 4}}
+    onRequestDelete={props.onRequestDelete}
+    onClick={props.onClick}
+    style={{margin: 4, width: 'inherit'}}
   >
     {props.icon && <Avatar color={props.iconColor} icon={props.icon} />}
     {props.avatarSrc && <Avatar src={props.avatarSrc} />}

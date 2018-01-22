@@ -18,12 +18,12 @@ export default class Tag extends PureComponent {
 		return (
 			<Chip 
 				backgroundColor={this.props.backgroundColor}
-				handleRequestDelete={this.props.onDelete}
-				onClick={this.props.handleClick}
-				style={{margin: 4}}
+				onRequestDelete={this.props.onDelete}
+				onClick={this.props.onClick}
 				icon={this.props.icon}
 				iconColor={this.props.iconColor}
 				avatarSrc={this.props.avatarSrc}
+				avatarText={this.props.avatarText}
 				avatarTextColor={this.props.avatarTextColor}
 				avatarTextBackgroundColor={this.props.avatarTextBackgroundColor}
 				label={this.props.value}

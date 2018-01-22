@@ -47,6 +47,8 @@ export default class Autocomplete extends Component {
 		onBlur: PropTypes.func,
 		onChange: PropTypes.func,
 		enterKeys: PropTypes.arrayOf(PropTypes.string),
+		backgroundColor: PropTypes.string,
+		labelColor: PropTypes.string,
 	}
 
 	static defaultProps = {
@@ -67,6 +69,8 @@ export default class Autocomplete extends Component {
 		onFocus: ()=>{},
 		onBlur: ()=>{},
 		onChange: ()=>{},
+		backgroundColor: null,
+		labelColor: null,
 	}
 
 	state = {
@@ -126,7 +130,7 @@ export default class Autocomplete extends Component {
 						<div className={styles.content}>
 							{tags.map((tag, idx) => {          
 								const valueToRender = (typeof tag === 'string') ? tag : tag.label
-								return <Tag value={valueToRender} key={idx} onDelete={this._onClickDelete.bind(this, idx)} />
+								return <Tag value={valueToRender} key={idx} onDelete={this._onClickDelete.bind(this, idx)} backgroundColor={this.props.backgroundColor} labelColor={this.props.labelColor} />
 							})}
 							<div className={`${input ? styles.inputContainer : styles.inputHidden}`}>
 								<input
@@ -140,8 +144,7 @@ export default class Autocomplete extends Component {
 									value={value}
 								/>
 							</div>
-							{ this.state.active && 
-							<Suggestions suggestions={suggestions} onClick={this.onClickSuggestion} focused={focusedSuggestion} /> }
+							<Suggestions suggestions={suggestions} onClick={this.onClickSuggestion} focused={focusedSuggestion} />
 						</div>
 						{loader && loaderPosition === 'bottom' && customLoader}
 					</div>

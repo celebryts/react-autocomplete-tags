@@ -1,6 +1,6 @@
 # react-autocomplete-tags
 
-A React component that build a Autocomplete with tags.
+A React component that build a Autocomplete with tags(Material Chips).
 
 ## Demos
 [https://celebryts.github.io/react-autocomplete-tags](https://celebryts.github.io/react-autocomplete-tags)
@@ -76,6 +76,8 @@ class Example extends Component {
 | [`onKeyDown`](#onKeyUpProps) | Function | ()=>{} | Callback for key down event. |
 | [`onFocus`](#onFocusProps) | Function | ()=>{} | Callback for focus event. |
 | [`onChange`](#onChangeProps) | Function | ()=>{} | Callback for changes in input. |
+| [`labelColor`](#labelColorProps) | String | null | To set label color of material chip. |
+| [`backgroundColor`](#backgroundColorProps) | String | null | To set background color of material chip. |
 
 
 <a name="classNameProp"></a>

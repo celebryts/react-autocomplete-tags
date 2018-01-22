@@ -8,10 +8,14 @@ export default class Tag extends PureComponent {
 	static propTypes = {
 		value: PropTypes.string.isRequired,
 		onDelete: PropTypes.func,
+		onClick: PropTypes.func,
+		labelColor: PropTypes.string,
+		backgroundColor: PropTypes.string,
 	}
 
 	static defaultProps = {
-		onDelete: ()=>{}
+		onDelete: ()=>{},
+		onClick: ()=>{}
 	}
 
 	render() {
@@ -20,24 +24,9 @@ export default class Tag extends PureComponent {
 				backgroundColor={this.props.backgroundColor}
 				onRequestDelete={this.props.onDelete}
 				onClick={this.props.onClick}
-				icon={this.props.icon}
-				iconColor={this.props.iconColor}
-				avatarSrc={this.props.avatarSrc}
-				avatarText={this.props.avatarText}
-				avatarTextColor={this.props.avatarTextColor}
-				avatarTextBackgroundColor={this.props.avatarTextBackgroundColor}
 				label={this.props.value}
+				labelColor={this.props.labelColor}
 			/>
-			// <div className={styles.tag}>
-			// 	<div className={styles.text}>
-			// 		{value}
-			// 	</div>
-			// 	<span className={styles.delete} onClick={onDelete}>
-			// 		<svg viewBox="0 0 40 40" className={styles.deleteIcon}>
-			// 			<path className={styles.deleteX} d="M 12,12 L 28,28 M 28,12 L 12,28" />
-			// 		</svg>
-			// 	</span>
-			// </div>
 		)
 	}
 }

@@ -68,7 +68,7 @@ export default class Autocomplete extends Component {
 		enterKeys: [],
 		children: <input />,
 		saveOnBlur: false,
-		allowDuplicates: false,
+		allowDuplicates: true,
 		onKeyUp: ()=>{},
 		onKeyDown: ()=>{},
 		onAdd: ()=>{},

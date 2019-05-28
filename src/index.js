@@ -17,6 +17,13 @@ const validateTagsLimit = (tags, limit) => {
 	return tags
 }
 
+const validateTagExist = (tags, tag) => {
+	if(tags.findIndex(t => t === tag) === -1) {
+		return false
+	}
+	return true
+}
+
 const TAG_SHAPE = PropTypes.shape({
 	label: PropTypes.string.isRequired,
 	value: PropTypes.string.isRequired,
@@ -39,6 +46,7 @@ export default class Autocomplete extends Component {
 		loaderPosition: PropTypes.oneOf(['top', 'bottom']),
 		children: PropTypes.node,
 		saveOnBlur: PropTypes.bool,
+		allowDuplicates: PropTypes.bool,
 		onKeyUp: PropTypes.func,
 		onKeyDown: PropTypes.func,
 		onAdd: PropTypes.func,
@@ -60,6 +68,7 @@ export default class Autocomplete extends Component {
 		enterKeys: [],
 		children: <input />,
 		saveOnBlur: false,
+		allowDuplicates: true,
 		onKeyUp: ()=>{},
 		onKeyDown: ()=>{},
 		onAdd: ()=>{},
@@ -240,22 +249,43 @@ export default class Autocomplete extends Component {
 	 */
 	onClickSuggestion = idx => {
 		const {label, value} = this.state.suggestions[idx]
-		this._addTag(label, value)
+		const {tags} = this.state
+		const {allowDuplicates} = this.props
+		if(!allowDuplicates) {
+			if(!validateTagExist(tags, label)) {
+				this._addTag(label, value)
+			}
+		} else {
+			this._addTag(label, value)
+		}
 	}
 
 	/* On enter we add a tag in state.tags */
 	_handleEnter = (ev, value) =>{
-		const { suggestions, focusedSuggestion } = this.state
-		const { allowCreateTag } = this.props
+		const { suggestions, focusedSuggestion, tags } = this.state
+		const { allowCreateTag, allowDuplicates } = this.props
 		const hasfocusedsuggestion = this.hasfocusedsuggestion()
 
 		if(allowCreateTag){
 			let tagToAdd = (!hasfocusedsuggestion) ? value : suggestions[focusedSuggestion].label
-			this._addTag(tagToAdd, value)
+			if(allowDuplicates) {
+				this._addTag(tagToAdd, value)
+			} else {
+				if(!validateTagExist(tags, tagToAdd)) {
+					this._addTag(tagToAdd, value)
+				}
+			}
 		}else{
 			if(hasfocusedsuggestion){
+				console.log('has focused suggestion')
 				const { label: labelToAdd, value: valueToAdd } = suggestions[focusedSuggestion]
-				this._addTag(labelToAdd, valueToAdd)
+				if(allowDuplicates) {
+					this._addTag(labelToAdd, valueToAdd)
+				} else {
+					if(!validateTagExist(tags, valueToAdd)) {
+						this._addTag(labelToAdd, valueToAdd)
+					}
+				}
 			}
 		}
 	}

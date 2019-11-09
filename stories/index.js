@@ -14,6 +14,7 @@ import Suggestions from './Suggestions/Suggestions'
 import Tags from './Tags/Tags'
 import LimitTags from './LimitTags/LimitTags'
 import SaveOnBlur from './SaveOnBlur/SaveOnBlur'
+import Placeholder from './Placeholder/Placeholder'
 
 storiesOf('Events', module)
 	.add('Basic', () => <Basic />)
@@ -26,7 +27,9 @@ storiesOf('Events', module)
 	.add('Handling onKeyDown', () => <KeyDown />)
 
 storiesOf('Options', module)
+	.add('Add placeholder', () => <Placeholder />)
 	.add('With suggestions', () => <Suggestions />)
 	.add('With initial tags', () => <Tags />)
 	.add('Limit in 2 tags', () => <LimitTags />)
 	.add('Add tag on blur', () => <SaveOnBlur />)
+	

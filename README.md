@@ -66,6 +66,7 @@ class Example extends Component {
 | Prop | Type | Default | Description |
 | :--- | :--- | :---: | :--- |
 | [`className`](#classNameProp) | String | '' | Classname to style the root div. |
+| [`placeholder`](#placeholder) | String | '' | Placeholder on input box. |
 | [`suggestions`](#suggestionsProp) | Array | [] | Suggestions to show. |
 | [`tags`](#tagsProp) | Array | [] | Visible tags in input. |
 | [`limitTags`](#limitTagsProp) | Number | null | Maximum allowed tags. |
@@ -105,6 +106,14 @@ You can style elements like this:
 
 ```
 
+<a name="placeholderProp"></a>
+#### `placeholder` : String
+
+Placeholder on autocomplete input box.
+
+```js
+<Autocomplete placeholder="Insert your tags here" />
+```
 
 <a name="suggestionsProp"></a>
 #### `suggestions` : Array

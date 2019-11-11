@@ -46,6 +46,7 @@ export default class Autocomplete extends Component {
 		onFocus: PropTypes.func,
 		onBlur: PropTypes.func,
 		onChange: PropTypes.func,
+		placeholder: PropTypes.string,
 		enterKeys: PropTypes.arrayOf(PropTypes.string),
 	}
 
@@ -60,6 +61,7 @@ export default class Autocomplete extends Component {
 		enterKeys: [],
 		children: <input />,
 		saveOnBlur: false,
+		placeholder: '',
 		onKeyUp: ()=>{},
 		onKeyDown: ()=>{},
 		onAdd: ()=>{},
@@ -113,7 +115,7 @@ export default class Autocomplete extends Component {
 	}
 
 	render() {
-		const { className, children, onKeyUp, customLoader, loaderPosition, loader } = this.props
+		const { className, children, onKeyUp, customLoader, loaderPosition, loader, placeholder } = this.props
 		const { tags, value, suggestions, focusedSuggestion, input } = this.state
 		return (
 			<div>
@@ -131,6 +133,7 @@ export default class Autocomplete extends Component {
 							<div className={`${input ? styles.inputContainer : styles.inputHidden}`}>
 								<input
 									type="text"
+									placeholder={tags.length === 0 ? placeholder : ''}
 									ref={node => this.input = node}
 									onKeyUp={onKeyUp}
 									onKeyDown={this._onKeyDown}
